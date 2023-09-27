@@ -61,7 +61,26 @@ mostFrequentVowel(['dog', 'cow', 'pig', 'chicken']); // 'i' or 'o'
 
 const VOWELS = ['a', 'e', 'i', 'o', 'u'];
 const mostFrequentVowel = function (words, counter = {}) {
-  // Your code here 
+  let word = words[words.length - 1]
+  if (words.length === 0) {
+    if (!Object.values(counter).length) {
+      return ''
+    }
+    let valArr = Object.values(counter)
+    let keyArr = Object.keys(counter)
+    let index = valArr.indexOf(Math.max(...valArr))
+    return keyArr[index]
+  }
+  for (let i = 0; i < word.length; i++) {
+    if (VOWELS.includes(word[i])) {
+      if (counter[word[i]] === undefined){
+        counter[word[i]] = 0
+      }
+        counter[word[i]] += 1
+    }
+  }
+  words.pop()
+  return mostFrequentVowel(words, counter)
 }
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS  LINE*****************/
